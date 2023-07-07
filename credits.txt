@@ -1,2 +1,7 @@
 music theme: DM Dokuro - raincloud's slumber
 shader: https://www.shadertoy.com/view/wddBzN
+
+shoutouts to:
+Sudospective
+mrthatkid
+aCarson

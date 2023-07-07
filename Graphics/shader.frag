@@ -1,6 +1,7 @@
 #version 120
 uniform sampler2D sampler0;
 uniform vec2 resolution;
+uniform vec2 gl_TextureCoord
 uniform float time;
 vec2 iMouse = vec2(1,1);
 vec3 dist(vec3 pos_arg_in)
@@ -63,6 +64,6 @@ vec3 dist(vec3 pos_arg_in)
 
 void main()
 {
-    vec2 uv = gl_FragCoord.xy/resolution.xy;
+    vec2 uv = gl_TextureCoord.xy;
     gl_FragColor = vec4(dist(vec3(uv, 1.0)), 1.0);
 }
