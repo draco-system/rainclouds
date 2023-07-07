@@ -6,7 +6,8 @@
 --}
 
 return Def.ActorFrame{ Def.Sprite{
-    Frag = THEME:GetPathG('','shader.frag'), --shader :)
+    Texture = THEME:GetPathG('','lichen'), --calling GetPathG through theme functions; uses 2 strings
+    Frag = THEME:GetPathG('','rain.frag'), --shader :)
     OnCommand = function(self) self:Center() :zoomto(SCREEN_WIDTH,SCREEN_HEIGHT)
 end
     }

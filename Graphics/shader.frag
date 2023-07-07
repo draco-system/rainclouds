@@ -2,7 +2,7 @@
 uniform sampler2D sampler0;
 uniform vec2 resolution;
 uniform float time;
-vec2 iMouse = vec2(0.5,0.5);
+vec2 iMouse = vec2(1,1);
 vec3 dist(vec3 pos_arg_in)
 {
     vec3 pos_arg = pos_arg_in + vec3((0.5 - iMouse.xy / 4.0 / resolution.xy), 0.0);
