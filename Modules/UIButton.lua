@@ -6,12 +6,12 @@ return function(t)
                 self
                     :SetWidth(t.Width)
                     :SetHeight(t.Height)
-                    :diffuse(color(t.diffuse))
+                    :diffuse(color(t.Diffuse))
             end,
         },
         Def.BitmapText{
             Font = 'Common Font'
-            Text = t.text or 'Button'
+            Text = t.Text or 'Button'
         }
     }
 end
