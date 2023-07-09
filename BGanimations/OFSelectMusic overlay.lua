@@ -1,1 +1,1 @@
-return LoadModule("Wheel.IdolMWheel.lua")("dance_single")
+return LoadModule("Wheel.DDR5thMixWheel.lua")("dance_single")

@@ -287,7 +287,7 @@ function TF_WHEEL.CountingNumbers(self, NumStart, NumEnd, Duration, format)
 
 	if not self:GetCommand("Count") then
 		self:addcommand("Count", function(self)
-			self:settext(TF_WHEEL.Count[TF_WHEEL.Cur])
+			self:settext(TF_WHEEL.Count[TF_WHEEL.Cur]):Regen()
 			TF_WHEEL.Cur = TF_WHEEL.Cur + 1
 		end)
 	end
