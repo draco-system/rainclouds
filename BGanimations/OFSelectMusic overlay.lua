@@ -1,0 +1,1 @@
+return LoadModule("Wheel.IdolMWheel.lua")("dance_single")
