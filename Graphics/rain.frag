@@ -6,7 +6,7 @@ uniform vec2 resolution;
 uniform vec2 textureCoord;
 uniform sampler2D sampler0;
 uniform sampler2D samplerRandom;
-in vec2 imageCoord;
+varying vec2 imageCoord;
 uniform vec4 color;
 uniform float xoff = 0.0;
 uniform float yoff = 0.0;
