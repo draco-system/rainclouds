@@ -10,7 +10,7 @@ return function(t)
             end,
         },
         Def.BitmapText{
-            Font = 'Common Font'
+            Font = 'Common Font',
             Text = t.Text or 'Button'
         }
     }

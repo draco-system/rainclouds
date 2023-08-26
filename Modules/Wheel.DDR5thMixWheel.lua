@@ -96,7 +96,7 @@ local function MoveSelection(self, offset, Songs)
 			while pos < 1 do pos = #Songs + pos end
 
 			-- Transform the wheel, As in make it move.
-			self:GetChild("Wheel"):GetChild("Container" .. i):linear(.1):x(transform):addy((offset * -45))
+			self:GetChild("Wheel"):GetChild("Container" .. i):linear(.1):x(0):addy((offset * -45))
 
 			-- Here we define what the wheel does if it is outside the values.
 			-- So that when a part is at the bottom it will move to the top.
@@ -436,7 +436,7 @@ return function(Style)
 			Name = "Container" .. i,
 
 			-- Set position of item.
-			OnCommand = function(self) self:xy((offset * offset) * 3, offset * 45) end,
+			OnCommand = function(self) self:xy(0, offset * 45) end,
 
 			-- Song Title for on wheel.
 			Def.Text {

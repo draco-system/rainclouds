@@ -37,6 +37,14 @@ TF_WHEEL.StyleDB = {
 	["dance_threepanel"] = "threepanel",
 	["dance_routine"] = "routine",
 
+	--Groove
+	["groove_single"] = "single",
+	["groove_double"] = "double",
+	["groove_couple"] = "couple",
+	["groove_solo"] = "solo",
+	["groove_threepanel"] = "threepanel",
+	["groove_routine"] = "routine",
+
 	--Pump
 	["pump_single"] = "single",
 	["pump_halfdouble"] = "halfdouble",
@@ -157,6 +165,10 @@ TF_WHEEL.StyleDBVersus = {
 	--Dance
 	["dance_single"] = "versus",
 	["dance_threepanel"] = "threepanel-versus",
+
+	--Groove
+	["groove_single"] = "versus",
+	["groove_threepanel"] = "threepanel-versus",
 
 	--Pump
 	["pump_single"] = "versus",

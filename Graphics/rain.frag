@@ -1,7 +1,7 @@
 #version 120
 uniform vec2 textureSize;
 uniform vec2 imageSize;
-uniform float time;
+uniform float realtime;
 uniform vec2 resolution;
 uniform vec2 textureCoord;
 uniform sampler2D sampler0;
@@ -16,8 +16,8 @@ vec2 img2tex( vec2 v ) { return v / textureSize * imageSize; }
 vec3 dist (vec3 pos_arg_in)
 {
    vec3 pos_arg = pos_arg_in + vec3((0.5 - vec2(xoff,yoff) / 4.0 / resolution.xy), 0.0);
-   float rnd2 = texture2D(sampler0, mod(vec2(pos_arg.x+ time / 10.0, pos_arg.y / 10.0 + time / 3.0), 1.0)).x;
-    rnd2 += texture2D(sampler0, mod(vec2(pos_arg.x, pos_arg.y / 5.0 + time / 5.0), 1.0)).x;
+   float rnd2 = texture2D(sampler0, mod(vec2(pos_arg.x+ realtime / 10.0, pos_arg.y / 10.0 + realtime / 3.0), 1.0)).x;
+    rnd2 += texture2D(sampler0, mod(vec2(pos_arg.x, pos_arg.y / 5.0 + realtime / 5.0), 1.0)).x;
     pos_arg = pos_arg_in + vec3((0.5 - vec2(xoff,yoff) / resolution.xy), 0.0);
     float rnd = texture2D(sampler0, mod(vec2(pos_arg.x, pos_arg.y), 1.0)).x;
     float rnd3 = texture2D(sampler0, mod(vec2(pos_arg.x/10.0, pos_arg.y/10.0), 1.0)).x;
@@ -39,7 +39,7 @@ vec3 dist (vec3 pos_arg_in)
 
             const vec3 center = vec3(0.5, 0.5, 1.0);
             const float decay_period = 30.0;
-		    float rnd4 = time + texture2D(sampler0, mod(vec2(s, t), 1.0)).x * decay_period;
+		    float rnd4 = realtime + texture2D(sampler0, mod(vec2(s, t), 1.0)).x * decay_period;
             float alpha_candidate = 1.0 / (50.0 + (float(mod(int(rnd4) , int(decay_period))) + fract(rnd4)) * 5.0);
             float radius = max(rnd3 * alpha_candidate / 1.0, 0.0005) ;
             alpha_candidate = min((radius - 0.003) * 500.0, 1.0);

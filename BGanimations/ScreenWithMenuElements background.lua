@@ -10,7 +10,14 @@ return Def.ActorFrame{
         Texture = THEME:GetPathG('','static_stretch'), --calling GetPathG through theme functions; uses 2 strings
         Frag = THEME:GetPathG('','rain.frag'), --shader :)
         -- Frag = THEME:GetPathG(',','rain.frag'), for some reason it can't find the shader
-        OnCommand = function(self) self:Center() :zoomto(SCREEN_WIDTH,SCREEN_HEIGHT) --setting it to the screen width + height
-end
+        OnCommand = function(self)
+            self:Center():zoomto(SCREEN_WIDTH,SCREEN_HEIGHT) --setting it to the screen width + height
+            self:queuecommand('Update')
+        end,
+        UpdateCommand = function(self)
+            self:aux(self:getaux() + self:GetEffectDelta())
+            self:GetShader():uniform1f('realtime', self:getaux()) -- creating our own time variable
+            self:sleep(self:GetEffectDelta()):queuecommand('Update')
+        end,
     },
 }
