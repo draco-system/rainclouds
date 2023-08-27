@@ -19,7 +19,7 @@ local DiffNames = {
 	"PRACTICE", -- Difficulty_Beginner
 	"BASIC", -- Difficulty_Easy
 	"TRICK", -- Difficulty_Medium
-	"MANIAC ", -- Difficulty_Hard
+	"MANIAC", -- Difficulty_Hard
 	"EXTRA", -- Difficulty_Challenge
 	"EDIT" -- Difficulty_Edit
 }
@@ -895,12 +895,13 @@ return function(Style)
 			end,
 			LoadCommand = function(self)
 				-- Check if its a song.
-				if type(GroupsAndSongs[CurSong]) ~= "string" then
+				-- Also check if we have a CDTitle to display. ~Sudo
+				if type(GroupsAndSongs[CurSong]) ~= "string" and GroupsAndSongs[CurSong][1]:GetCDTitlePath() then
 					-- It is, Get CDTitle.
-					self:visible(1):Load(GroupsAndSongs[CurSong][1]:GetCDTitlePath())
+					self:visible(true):Load(GroupsAndSongs[CurSong][1]:GetCDTitlePath())
 				else
 					-- It's not, Hide CDTitle.
-					self:visible(0)
+					self:visible(false)
 				end
 
 				self:zoom(TF_WHEEL.Resize(self:GetWidth(), self:GetHeight(), 60, 60)):zoomy(0)
@@ -960,9 +961,21 @@ return function(Style)
 		-- Load the difficulties selector.
 		Diffs .. { OnCommand = function(self) self:x(-(SCREEN_CENTER_X * OffsetMath) + 78):valign(0) end },
 
+		-- Wheel background
+		Def.Quad {
+			InitCommand = function(self)
+				self
+					:x((SCREEN_CENTER_X * OffsetMath) - 180)
+					:SetSize(360, SCREEN_HEIGHT)
+					:diffuse(0, 0, 0, 0.5)
+					:fadeleft(0.025)
+					:faderight(0.025)
+			end,
+		},
+
 		-- Load the wheel.
 		Wheel .. {
-			OnCommand = function(self) self:x((SCREEN_CENTER_X * OffsetMath) - 320) end
+			OnCommand = function(self) self:x((SCREEN_CENTER_X * OffsetMath) - 180):y(18) end
 		},
 
 		-- Add the glowing selector part on the top of the wheel.
