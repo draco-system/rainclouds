@@ -15,7 +15,7 @@ return Def.ActorFrame {
         },
         Def.Text{
             Font = THEME:GetPathF('','EXO-REGULAR.TTF'),
-            Text = gc:GetName(),
+            Text = gc:GetText() or gc:GetName(),
             Size = 45,
             StrokeSize = 2,
             InitCommand = function(self)
