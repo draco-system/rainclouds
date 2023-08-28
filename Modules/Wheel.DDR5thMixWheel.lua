@@ -108,31 +108,35 @@ local function MoveSelection(self, offset, Songs)
 				-- Check if it's a song.
 				if type(Songs[pos]) ~= "string" then
 					-- It's a song, Display song title.
-					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):settext(Songs[pos][1]:GetDisplayMainTitle()):Regen()
+					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):settext(Songs[pos][1]:GetDisplayMainTitle())
 				else
 					-- It is not a song, Display group name instead.
-					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):settext(Songs[pos]):Regen()
+					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):settext(Songs[pos])
 				end
 
 				-- Set the width of the text.
-				self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):zoom(.7):y(-10):maxwidth(400)
+				self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):zoom(.7):y(-16):maxwidth(500)
 
 				-- Check if it's a song.
 				if type(Songs[pos]) ~= "string" then
 					-- Check if song has subtitle.
 					if Songs[pos][1]:GetDisplaySubTitle() ~= "" then
 						-- It does have a subtitle so resize the title to fit it.
-						self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):zoom(.4):y(-12):maxwidth(650)
+						self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):zoom(.4):y(-26):maxwidth(715)
 					end
 
 					-- Set subtitle and artist to the values it has.
-					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("SubTitle"):settext(Songs[pos][1]:GetDisplaySubTitle()):Regen()
-					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Artist"):settext("/" .. Songs[pos][1]:GetDisplayArtist()):Regen()
+					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("SubTitle"):settext(Songs[pos][1]:GetDisplaySubTitle())
+					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Artist"):settext(Songs[pos][1]:GetDisplayArtist())
 				else
 					-- It is not a song so we set it to empty, Because groups dont have subtitles or atists.
-					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("SubTitle"):settext(""):Regen()
-					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Artist"):settext(""):Regen()
+					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("SubTitle"):settext("")
+					self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Artist"):settext("")
 				end
+
+				self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Title"):Regen()
+				self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("SubTitle"):maxwidth(1750):Regen()
+				self:GetChild("Wheel"):GetChild("Container" .. i):GetChild("Artist"):maxwidth(1750):Regen()
 			end
 		end
 
@@ -141,7 +145,11 @@ local function MoveSelection(self, offset, Songs)
 		-- Check if it's a song.
 		if type(Songs[CurSong]) ~= "string" then
 			-- It is a song, so we load the under banner.
-			self:GetChild("BannerUnderlay"):visible(1):Load(Songs[CurSong][1]:GetBannerPath())
+			if Songs[CurSong][1]:HasBanner() then
+				self:GetChild("BannerUnderlay"):visible(1):Load(Songs[CurSong][1]:GetBannerPath())
+			else
+				self:GetChild("BannerUnderlay"):visible(0)
+			end
 		else
 			-- It is not a song, Do an extra check to see if group has banner.
 			if SONGMAN:GetSongGroupBannerPath(Songs[CurSong]) ~= "" then
@@ -191,32 +199,35 @@ local function MoveSelection(self, offset, Songs)
 			-- Check if it's a song.
 			if type(Songs[pos]) ~= "string" then
 				-- It's a song, Display song title.
-				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):settext(Songs[pos][1]:GetDisplayMainTitle()):Regen()
+				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):settext(Songs[pos][1]:GetDisplayMainTitle())
 			else
 				-- It is not a song, Display group name instead.
-				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):settext(Songs[pos]):Regen()
+				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):settext(Songs[pos])
 			end
 
 			-- Set the width of the text.
-			self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):zoom(.7):y(-10):maxwidth(400)
+			self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):zoom(.7):y(-16):maxwidth(500)
 
 			-- Check if it's a song.
 			if type(Songs[pos]) ~= "string" then
 				-- Check if song has subtitle.
 				if Songs[pos][1]:GetDisplaySubTitle() ~= "" then
 					-- It does have a subtitle so resize the title to fit it.
-					self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):zoom(.4):y(-12):maxwidth(650)
+					self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):zoom(.4):y(-26):maxwidth(715)
 				end
 
 				-- Set subtitle and artist to the values it has.
-				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("SubTitle"):settext(Songs[pos][1]:GetDisplaySubTitle()):Regen()
-				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Artist"):settext("/" ..
-					Songs[pos][1]:GetDisplayArtist()):Regen()
+				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("SubTitle"):settext(Songs[pos][1]:GetDisplaySubTitle())
+				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Artist"):settext(Songs[pos][1]:GetDisplayArtist())
 			else
 				-- It is not a song so we set it to empty, Because groups dont have subtitles or atists.
-				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("SubTitle"):settext(""):Regen()
-				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Artist"):settext(""):Regen()
+				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("SubTitle"):settext("")
+				self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Artist"):settext("")
 			end
+
+			self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Title"):Regen()
+			self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("SubTitle"):maxwidth(1750):Regen()
+			self:GetChild("Wheel"):GetChild("Container" .. off):GetChild("Artist"):maxwidth(1750):Regen()
 		end
 	end
 
@@ -356,7 +367,7 @@ local function MoveSelection(self, offset, Songs)
 	-- Check if its a song.
 	if type(Songs[CurSong]) ~= "string" then
 		-- Do a counting up or counting down effect on the BPM display.
-		self:GetChild("BPM"):settext(Songs[CurSong][1]:GetDisplayBpms()[2]):Regen()
+		self:GetChild("BPM"):settext(string.format("%.0f", Songs[CurSong][1]:GetDisplayBpms()[2])):Regen()
 				
 	else
 		self:GetChild("BPM"):settext(0):Regen()
@@ -441,22 +452,25 @@ return function(Style)
 			-- Song Title for on wheel.
 			Def.Text {
 				Name = "Title",
-				Font = THEME:GetPathF('','EXO-REGULAR.ttf'),
+				Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
+				Font = THEME:GetPathF('','AlphaProta.ttf'),
+				StrokeSize = 2,
 				OnCommand = function(self)
 					-- Check if we are on group.
 					if type(GroupsAndSongs[pos]) == "string" then
 						-- Show group name.
-						self:settext(GroupsAndSongs[pos]):Regen()
+						self:settext(GroupsAndSongs[pos])
 						-- not group.
 					else
 						-- Show song title.
-						self:settext(GroupsAndSongs[pos][1]:GetDisplayMainTitle()):Regen()
+						self:settext(GroupsAndSongs[pos][1]:GetDisplayMainTitle())
 					end
 
 					-- Set the size of the text and the location.
-					self:zoom(.4):halign(0):y(-12):maxwidth(640)
+					self:zoom(.4):y(-26)
 						:diffuse(DisplayColor[1], DisplayColor[2], DisplayColor[3], DisplayColor[4])
 						:skewx(-.2)
+						:MainActor():diffusealpha(0)
 
 					-- Check if it's a song.
 					if type(GroupsAndSongs[pos]) ~= "string" then
@@ -465,11 +479,11 @@ return function(Style)
 						if GroupsAndSongs[pos][1]:GetDisplaySubTitle() == "" then
 
 							-- Its empty, Make title full size.
-							self:zoom(.7):y(-10):maxwidth(400)
+							self:zoom(.7):y(-16)
 						end
 					else
 						-- It's not a song, And groups dont have subtitles.
-						self:zoom(.7):y(-10):maxwidth(400)
+						self:zoom(.7):y(-16)
 					end
 				end
 			},
@@ -477,34 +491,40 @@ return function(Style)
 			-- The subtitle.
 			Def.Text {
 				Name = "SubTitle",
+				Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 				Font = THEME:GetPathF('','AlphaProta.ttf'),
+				StrokeSize = 2,
 				OnCommand = function(self)
 					-- Check if we are on group.
 					if type(GroupsAndSongs[pos]) ~= "string" then
 						-- Set Subtitle.
-						self:settext(GroupsAndSongs[pos][1]:GetDisplaySubTitle()):Regen()
+						self:settext(GroupsAndSongs[pos][1]:GetDisplaySubTitle())
 					end
 
 					-- Set size and colour.
-					self:zoom(.3):halign(0):maxwidth(650)
+					self:zoom(.2):y(-12)
 						:diffuse(DisplayColor[1], DisplayColor[2], DisplayColor[3], DisplayColor[4])
 						:skewx(-.2)
+						:MainActor():diffusealpha(0)
 				end
 			},
 			Def.Text {
 				Name = "Artist",
+				Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 				Font = THEME:GetPathF('','AlphaProta.ttf'),
+				StrokeSize = 2,
 				OnCommand = function(self)
 					-- Check if we are on group.
 					if type(GroupsAndSongs[pos]) ~= "string" then
 						-- Set artist.
-						self:settext("/" .. GroupsAndSongs[pos][1]:GetDisplayArtist()):Regen()
+						self:settext(GroupsAndSongs[pos][1]:GetDisplayArtist())
 					end
 
 					-- Set size and colour.
-					self:zoom(.3):halign(0):y(10):maxwidth(650)
+					self:zoom(.2):y(-4)
 						:diffuse(DisplayColor[1], DisplayColor[2], DisplayColor[3], DisplayColor[4])
 						:skewx(-.2)
+						:MainActor():diffusealpha(0)
 				end
 			}
 		}
@@ -548,7 +568,8 @@ return function(Style)
 			-- Difficulty text.
 			Def.Text {
 				Name = "DiffText",
-				Font = THEME:GetPathF("","AlphaProta.ttf"),
+				Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
+				Font = THEME:GetPathF('','AlphaProta.ttf'),
 				InitCommand = function(self)
 					-- Set size, colour, position and maxwidth.
 					self:zoom(.18):diffuse(0, 0, 0, 1):xy(-17, 22 * i):maxwidth(140)
@@ -573,7 +594,8 @@ return function(Style)
 			-- Difficulty text.
 			Def.Text {
 				Name = "DiffText",
-				Font = THEME:GetPathF('',"AlphaProta.ttf"),
+				Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
+				Font = THEME:GetPathF('','AlphaProta.ttf'),
 				InitCommand = function(self)
 					-- Set size, colour, position and maxwidth.
 					self:zoom(.18):diffuse(0, 0, 0, 1):xy(154, 22 * i):maxwidth(140)
@@ -758,6 +780,7 @@ return function(Style)
 
 		-- The BPN Text.
 		Def.Text {
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			Text = "BPM",
 			OnCommand = function(self)
@@ -769,6 +792,7 @@ return function(Style)
 		-- The BPM numbers.
 		Def.Text {
 			Name = "BPM",
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			Text = "0",
 			OnCommand = function(self)
@@ -786,6 +810,7 @@ return function(Style)
 
 		Def.Text {
 			Text = "bpm",
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			OnCommand = function(self)
 				self:xy(-(SCREEN_CENTER_X * OffsetMath) + 238, -130):zoom(.2)
@@ -804,6 +829,7 @@ return function(Style)
 
 		-- Set the stage text.
 		Def.Text {
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			Text = "STAGE",
 			OnCommand = function(self)
@@ -815,6 +841,7 @@ return function(Style)
 		-- The actual event text.
 		Def.Text {
 			Text = ToEnumShortString(GAMESTATE:GetCurrentStage()):upper(),
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			OnCommand = function(self)
 				self:MainActor():diffuse(0, 0.5, 0, 1)
@@ -864,8 +891,14 @@ return function(Style)
 			LoadCommand = function(self)
 				-- Check if its a song.
 				if type(GroupsAndSongs[CurSong]) ~= "string" then
-					-- It is, Load banner.
-					self:visible(1):Load(GroupsAndSongs[CurSong][1]:GetBannerPath())
+					-- It is, Check if it has a banner.
+					if GroupsAndSongs[CurSong][1]:HasBanner() then
+						-- It does, Load it.		
+						self:visible(1):Load(GroupsAndSongs[CurSong][1]:GetBannerPath())
+					else
+						-- It doesnt, Hide the banner.
+						self:visible(0)
+					end
 				else
 					-- It's a group, Check if it has a banner.
 					if SONGMAN:GetSongGroupBannerPath(GroupsAndSongs[CurSong]) ~= "" then
@@ -930,6 +963,7 @@ return function(Style)
 		-- Actual P1 text.
 		Def.Text {
 			Text = "1P",
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			OnCommand = function(self)
 				self:MainActor():diffuse(DisplayColor[1] / 4, DisplayColor[2] / 4, DisplayColor[3] / 4, DisplayColor[4])
@@ -940,6 +974,7 @@ return function(Style)
 
 		Def.Text {
 			Text = "2P",
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			OnCommand = function(self)
 				self:MainActor():diffuse(DisplayColor[1] / 4, DisplayColor[2] / 4, DisplayColor[3] / 4, DisplayColor[4])
@@ -950,6 +985,7 @@ return function(Style)
 
 		-- The difficulty text.
 		Def.Text {
+			Fallback = THEME:GetPathF('','NotoSans-All.ttf'),
 			Font =  THEME:GetPathF('','AlphaProta.ttf'),
 			Text = "DIFFICULTY",
 			OnCommand = function(self)
@@ -973,17 +1009,12 @@ return function(Style)
 			end,
 		},
 
-		-- Load the wheel.
-		Wheel .. {
-			OnCommand = function(self) self:x((SCREEN_CENTER_X * OffsetMath) - 180):y(18) end
-		},
-
 		-- Add the glowing selector part on the top of the wheel.
 		Def.Sprite {
 			Texture = THEME:GetPathG("", "DDR/Selector"),
 			OnCommand = function(self)
 				self:zoom(.65):xy((SCREEN_CENTER_X * OffsetMath) - 180, -2):faderight(1)
-					:diffuseshift():effectcolor1(1, 1, 1, .9)
+					:diffuseshift():effectcolor1(0, 0, 0, .3)
 					:effectcolor2(DisplayColor[1], DisplayColor[2], DisplayColor[3], .5)
 			end
 		},
@@ -1001,6 +1032,11 @@ return function(Style)
 			OnCommand = function(self)
 				self:zoom(.35):diffuse(1, 0, 0, 1):xy((SCREEN_CENTER_X * OffsetMath) - 20, -176 + (350 * (CurSong / #GroupsAndSongs)))
 			end
+		},
+
+		-- Load the wheel.
+		Wheel .. {
+			OnCommand = function(self) self:x((SCREEN_CENTER_X * OffsetMath) - 180):y(18) end
 		}
 	}
 end
