@@ -16,12 +16,14 @@ return Def.ActorFrame {
         Def.Text{
             Font = THEME:GetPathF('','EXO-REGULAR.TTF'),
             Text = gc:GetText() or gc:GetName(),
-            Size = 45,
-            StrokeSize = 2,
+            -- Double size for higher resolution.
+            Size = 90,
+            StrokeSize = 4,
             InitCommand = function(self)
-                self:y(12)
-                self:MainActor() :diffuse(color('#FFFFFF'))
-                self:StrokeActor() :diffuse(color('#798BA8'))
+                -- Slight x offset to fix ttf issue.
+                self:xy(6,12):zoom(.5)
+                self:MainActor():diffuse(color('#FFFFFF'))
+                self:StrokeActor():diffuse(color('#798BA8'))
             end,
             LoseFocusCommand = function(self)
                 self:glow(0, 0, 0, 0.5)
