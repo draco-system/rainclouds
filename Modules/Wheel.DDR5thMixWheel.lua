@@ -42,6 +42,8 @@ local DecOffset = 13
 -- The center offset of the wheel.
 local XOffset = 7
 
+local IsOnGroupMusic = false
+
 -- Move the wheel, We define the Offset using +1 or -1.
 -- We parse the Songs also so we can get the amount of songs.
 local function MoveSelection(self, offset, Songs)
@@ -381,13 +383,12 @@ local function MoveSelection(self, offset, Songs)
 		self:GetChild("Slider"):linear(.1):y(-176 + (350 * (CurSong / #Songs)))
 
 		-- Stop all the music playing, Which is the Song Music
-		SOUND:StopMusic()
-
-		-- Check if its a song.
-		if type(Songs[CurSong]) ~= "string" then
-			-- Play Current selected Song Music.
-			self:GetChild("MusicCon"):stoptweening():sleep(0.4):queuecommand("PlayCurrentSong")
+		if not IsOnGroupMusic then
+			SOUND:StopMusic()
 		end
+
+		-- Play Current selected Song Music.
+		self:GetChild("MusicCon"):stoptweening():sleep(0.4):queuecommand("PlayCurrentSong")
 	else
 		self:GetChild("Slider"):y(-176 + (350 * (CurSong / #Songs)))
 	end
@@ -634,6 +635,10 @@ return function(Style)
 							GroupsAndSongs[CurSong][1]:GetSampleStart(),
 							GroupsAndSongs[CurSong][1]:GetSampleLength(), 0, 0, true)
 					end
+					IsOnGroupMusic = false
+				elseif not IsOnGroupMusic then
+					SOUND:PlayMusicPart(THEME:GetPathS('','MusicWheel.ogg'),0,89,0,0, true)
+					IsOnGroupMusic = true
 				end
 			end
 		},
