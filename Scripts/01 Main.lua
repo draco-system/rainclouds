@@ -268,7 +268,7 @@ TF_WHEEL.DiffTab = {
 }
 
 -- Resize function, We use this to resize images to size while keeping aspect ratio.
-function TF_WHEEL.Resize(width, height, setwidth, sethight, preserve)
+function TF_WHEEL.Resize(width, height, setwidth, sethight, preserve, resize)
 	if height >= sethight and width >= setwidth then
 		if height * (setwidth / sethight) >= width then
 			return preserve and setwidth / width or sethight / height
@@ -280,8 +280,15 @@ function TF_WHEEL.Resize(width, height, setwidth, sethight, preserve)
 	elseif width >= setwidth then
 		return setwidth / width
 	else
-		return 1
+		if resize then
+			if (height*sethight) * (setwidth / sethight) >= (width*sethight) then
+				return preserve and setwidth / width or sethight / height
+			else
+				return preserve and sethight / height or setwidth / width
+			end
+		end
 	end
+	return 1
 end
 
 -- TO WRITE DOC.
@@ -342,5 +349,38 @@ function TF_WHEEL.Input(self)
 		if ToEnumShortString(event.type) == "Release" then
 			self:playcommand(event.GameButton .. "Release")
 		end
+	end
+end
+
+-- Actor Appended functions.
+function Actor:ForParent(Amount)
+	local CurSelf = self
+	for i = 1, Amount do
+		CurSelf = CurSelf:GetParent()
+	end
+	return CurSelf
+end
+
+function Sprite:LoadCachedBanner(Banner)
+	if TF_WHEEL.BannerLite then
+		return self:LoadFromCached("Banner", Banner)
+	else
+		return self:Load(Banner)
+	end
+end
+
+function Sprite:LoadCachedBackground(Background)
+	if TF_WHEEL.BackgroundLite then
+		return self:LoadFromCached("Background", Background)
+	else
+		return self:Load(Background)
+	end
+end
+
+function Sprite:LoadCachedJacket(Jacket)
+	if TF_WHEEL.JacketLite then
+		return self:LoadFromCached("Jacket", Jacket)
+	else
+		return self:Load(Jacket)
 	end
 end
