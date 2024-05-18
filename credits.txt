@@ -4,6 +4,6 @@ shader: https://www.shadertoy.com/view/wddBzN
 shoutouts to:
 Sudospective
 mrthatkid
-aCarson
+CeceliaisMe
 Jousway
 Outfox Dev Team <3
